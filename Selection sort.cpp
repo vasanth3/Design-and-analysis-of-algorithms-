@@ -1,33 +1,38 @@
 #include <stdio.h>
-void selectionSort(int arr[], int n) {
-    int i, j, min_index, temp;
-    for (i = 0; i < n - 1; i++) {
-        min_index = i;
-        for (j = i + 1; j < n; j++) {
-            if (arr[j] < arr[min_index]) {
-                min_index = j;
-            }
+void selectionSort(int arr[], int size);
+void swap(int *a, int *b);
+void selectionSort(int arr[], int size)
+{
+    int i, j;
+    for (i = 0 ;  i < size;i++)
+    {
+        for (j = i ; j < size; j++)
+        {
+            if (arr[i] > arr[j])
+                swap(&arr[i], &arr[j]);
         }
-        temp = arr[min_index];
-        arr[min_index] = arr[i];
-        arr[i] = temp;
     }
 }
-int main() {
-    int arr[] = {64, 25, 12, 22, 11};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int i;
-    printf("Array before sorting:\n");
-    for (i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
+ 
+void swap(int *a, int *b)
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int main()
+{
+    int array[10], i, size;
+    printf("How many numbers you want to sort:  ");
+    scanf("%d", &size);
+    printf("\nEnter %d numbers\t", size);
     printf("\n");
-    selectionSort(arr, n);
-    printf("Array after sorting:\n");
-    for (i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
+    for (i = 0; i < size; i++)
+        scanf("%d", &array[i]);
+    selectionSort(array, size);
+    printf("\nSorted array is ");
+    for (i = 0; i < size;i++)
+        printf(" %d ", array[i]);
     return 0;
 }
-
